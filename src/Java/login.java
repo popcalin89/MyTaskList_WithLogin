@@ -19,6 +19,7 @@ public class login extends HttpServlet {
         // read user and password introduced by the user in the UI
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String id = request.getParameter("id");
 
 
         int userid = -1;

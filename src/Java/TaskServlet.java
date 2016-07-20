@@ -31,7 +31,7 @@ public class TaskServlet extends HttpServlet {
             System.out.println("bravo, esti un user deja logat");
 
             try {
-                 List l = AccesDB.readTasks();
+                List l = AccesDB.readTasks(iduser);
 
                 // put the list in a json
                 JsonObjectBuilder jObjBuilder = Json.createObjectBuilder();

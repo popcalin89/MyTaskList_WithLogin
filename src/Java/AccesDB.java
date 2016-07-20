@@ -41,7 +41,10 @@ public class AccesDB {
     }
 
 
-    public static List readTasks() throws ClassNotFoundException, SQLException {
+    public static List readTasks(Integer iduser) throws ClassNotFoundException, SQLException{
+
+
+
         // 1. load driver
         Class.forName("org.postgresql.Driver");
 
@@ -57,7 +60,7 @@ public class AccesDB {
         Statement st = conn.createStatement();
 
         // 5. execute a query
-        ResultSet rs = st.executeQuery("SELECT task,iduser FROM tasklist ");
+        ResultSet rs = st.executeQuery("SELECT id,task FROM tasklist where iduser='"+ iduser +"'");
 
         // 6. iterate the result set and print the values
 
@@ -68,7 +71,7 @@ public class AccesDB {
             TaskBean task = new TaskBean();
 
             task.setTask(rs.getString("task").trim());
-            task.setId(rs.getLong("iduser"));
+            task.setId(rs.getLong("id"));
 
 
             //scriu obiectul(randul) in lista

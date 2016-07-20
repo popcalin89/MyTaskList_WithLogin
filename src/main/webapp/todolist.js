@@ -27,7 +27,7 @@ function markDone(id) {
 
 function loadTasks() {
     $.ajax({
-        url: 'items?action=list'
+        url: 'mytask'
     }).done(function (response) {
         listTasks(response.myTask);
     });
