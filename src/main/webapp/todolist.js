@@ -8,7 +8,6 @@ function listTasks(tasks) {// modificari
         //var checked = task.done ? ' checked=""' : '';
         var taskHtml =
             '<ul>' +
-                //'<input type="checkbox"' + checked + ' value="' + task.id + '" onclick=markDone("' + task.id + '")>' +
             '<input type="checkbox" value="' + task.id + '" onclick=markDone("' + task.id + '")>' +
             task.task +
             '</ul>';
@@ -17,13 +16,13 @@ function listTasks(tasks) {// modificari
     myTaskHTML.innerHTML = listHtml;
 }
 
-function markDone(id) {
-    $.ajax({
-        url: 'items?action=done&id='+id
-    }).done(function (response) {
-        loadTasks();
-    });
-}
+//function markDone(id) {
+//    $.ajax({
+//        url: 'items?action=done&id='+id
+//    }).done(function (response) {
+//        loadTasks();
+//    });
+//}
 
 function loadTasks() {
     $.ajax({
@@ -34,9 +33,9 @@ function loadTasks() {
 }
 
 function addTask() {
-    var toDoText = document.getElementById('todoid').value;
+    var toDoText = document.getElementById('tasklist').value;
     $.ajax({
-        url: 'items?action=add&value='+toDoText
+        url: 'addtask?textToTask='+toDoText
     }).done(function (response) {
         location.href = "todolist.html";
     });

@@ -41,8 +41,7 @@ public class AccesDB {
     }
 
 
-    public static List readTasks(Integer iduser) throws ClassNotFoundException, SQLException{
-
+    public static List readTasks(Integer iduser) throws ClassNotFoundException, SQLException {
 
 
         // 1. load driver
@@ -60,7 +59,7 @@ public class AccesDB {
         Statement st = conn.createStatement();
 
         // 5. execute a query
-        ResultSet rs = st.executeQuery("SELECT id,task FROM tasklist where iduser='"+ iduser +"'");
+        ResultSet rs = st.executeQuery("SELECT id,task FROM tasklist where iduser='" + iduser + "'");
 
         // 6. iterate the result set and print the values
 
@@ -88,7 +87,7 @@ public class AccesDB {
         return listOfTasks;
     }
 
-    public static void addTask (String task) throws ClassNotFoundException, SQLException {
+    public static void addTask(String textToTask) throws ClassNotFoundException, SQLException {
         // 1. load driver
         Class.forName("org.postgresql.Driver");
 
@@ -101,8 +100,8 @@ public class AccesDB {
         Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
         // 4. create a query statement
-        PreparedStatement pSt = conn.prepareStatement("INSERT INTO tasklist (task ) VALUES (?,)");
-        pSt.setString(1, task);
+        PreparedStatement pSt = conn.prepareStatement("INSERT INTO tasklist (task) VALUES (?)");
+        pSt.setString(1, textToTask);
 
         // 5. execute a prepared statement
         int rowsInserted = pSt.executeUpdate();
@@ -111,4 +110,5 @@ public class AccesDB {
         pSt.close();
         conn.close();
     }
+
 }
