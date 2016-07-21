@@ -1,4 +1,3 @@
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,21 +8,22 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
-
 /**
- * Created by caly on 7/20/2016.
+ * Created by caly on 7/21/2016.
  */
-@WebServlet("/addtask")
-public class AddTaskServlet extends HttpServlet {
+@WebServlet("/removetask")
+public class RemoveTaskServlet extends HttpServlet {
 
     @Override
     public void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession(true);
+        Integer id = (Integer) session.getAttribute("id");
         Integer iduser = (Integer) session.getAttribute("iduser");
         String textToTask = req.getParameter("textToTask");
         try {
-            AccesDB.addTask(textToTask,iduser);
+            AccesDB.removeTask(id);
+            System.out.println("randul a fost sters");
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

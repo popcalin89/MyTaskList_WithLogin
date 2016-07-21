@@ -87,7 +87,7 @@ public class AccesDB {
         return listOfTasks;
     }
 
-    public static void addTask(String textToTask) throws ClassNotFoundException, SQLException {
+    public static void addTask(String textToTask, Integer iduser) throws ClassNotFoundException, SQLException {
         // 1. load driver
         Class.forName("org.postgresql.Driver");
 
@@ -100,8 +100,10 @@ public class AccesDB {
         Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
         // 4. create a query statement
-        PreparedStatement pSt = conn.prepareStatement("INSERT INTO tasklist (task) VALUES (?)");
-        pSt.setString(1, textToTask);
+        PreparedStatement pSt = conn.prepareStatement("INSERT INTO tasklist (iduser,task) VALUES (?,?)");
+        pSt.setInt(1, iduser);
+        pSt.setString(2, textToTask);
+        System.out.println("adus cu succes");
 
         // 5. execute a prepared statement
         int rowsInserted = pSt.executeUpdate();
@@ -111,4 +113,35 @@ public class AccesDB {
         conn.close();
     }
 
+
+    public static void removeTask(Integer id) throws ClassNotFoundException, SQLException {
+        // 1. load driver
+        Class.forName("org.postgresql.Driver");
+
+        // 2. define connection params to db
+        final String URL = "jdbc:postgresql://54.93.65.5:5432/4_Calin";
+        final String USERNAME = "fasttrackit_dev";
+        final String PASSWORD = "fasttrackit_dev";
+
+        // 3. obtain a connection
+        Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+        // 4. create a query statement
+        PreparedStatement pSt = conn.prepareStatement("DELETE FROM tasklist WHERE id=?");
+        pSt.setInt(1, id);
+
+        // 5. execute a prepared statement
+        int rowsDeleted = pSt.executeUpdate();
+        if(rowsDeleted!=0)
+            System.out.println("Deleting row...");
+        else if (rowsDeleted==0)
+        {
+            System.out.println("Row has been deleted successfully.");
+        }
+
+
+        // 6. close the objects
+        pSt.close();
+        conn.close();
+    }
 }
