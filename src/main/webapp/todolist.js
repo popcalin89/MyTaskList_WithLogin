@@ -1,5 +1,5 @@
 
-function listTasks(tasks) {// modificari
+function listTasks(tasks) {
     var myTaskHTML = document.getElementById('myTaskHTML')
     var listHtml = '';
 
@@ -18,6 +18,7 @@ function listTasks(tasks) {// modificari
 }
 
 function markDone(id) {
+
     $.ajax({
         url: 'removetask?id='+id
     }).done(function (response) {

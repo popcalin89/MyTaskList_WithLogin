@@ -18,9 +18,10 @@ public class RemoveTaskServlet extends HttpServlet {
     public void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession(true);
-        Integer id = (Integer) session.getAttribute("id");
-        Integer iduser = (Integer) session.getAttribute("iduser");
-        String textToTask = req.getParameter("textToTask");
+        int id = Integer.parseInt(req.getParameter("id"));
+
+//        Integer iduser = (Integer) session.getAttribute("iduser");
+//        String textToTask = req.getParameter("textToTask");
         try {
             AccesDB.removeTask(id);
             System.out.println("randul a fost sters");
